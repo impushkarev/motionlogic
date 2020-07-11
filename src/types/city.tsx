@@ -1,7 +1,5 @@
-import { TUser } from './user'
-
 interface ICity {
-  id: number,
+  id: number
   region: string,
   city: string
 }
@@ -9,7 +7,7 @@ interface ICity {
 interface IFilter {
   field: string,
   search: string,
-  isAsc: boolean
+  isAsc: boolean,
 }
 
 export type TCity = ICity

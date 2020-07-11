@@ -9,7 +9,14 @@ type action = {
   filter: string,
 }
 
-const city = (state: TCity[] = [], action: action) => {
+const loadState = () => {
+  const serializedCities = localStorage.getItem('cities')
+  if (serializedCities !== null)
+    return JSON.parse(serializedCities)
+  return []
+}
+
+const city = (state: TCity[] = loadState(), action: action) => {
   switch (action.type) {
     case 'INIT_CITIES':
       return action.cities

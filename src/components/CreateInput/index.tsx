@@ -23,6 +23,12 @@ const CreateInput:React.FC<Props> = ({ cities, addCity }) => {
   const getTasks = async () => {
     const data = await fetch('https://gist.githubusercontent.com/gorborukov/0722a93c35dfba96337b/raw/435b297ac6d90d13a68935e1ec7a69a225969e58/russia')
     .then(res => res.json())
+    .then(res => {
+      res.map((item, index) => {
+        item.id = index
+      })
+      return res
+    })
     setScities(data)
   }
 

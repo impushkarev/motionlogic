@@ -16,3 +16,7 @@ export const sortCities = (filter: string) => ({
   type: 'SORT_CITIES',
   filter
 })
+export const saveCities = (cities) => {
+  const serializedState = JSON.stringify(cities)
+  localStorage.setItem('cities', serializedState)
+}

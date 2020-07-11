@@ -23,7 +23,7 @@ const TableItem:React.FC<Props> = ({ city, deleteCity }) => {
       <TableCell>
         {city.region}
       </TableCell>
-      <TableCell>
+      <TableCell align="right">
         <IconButton aria-label="delete" onClick={() => deleteCity(city.id)} >
           <DeleteIcon/>
         </IconButton>

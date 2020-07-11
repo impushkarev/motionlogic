@@ -28,7 +28,7 @@ const TableHeader:React.FC<Props> = ({ headCells, filter, changeFilter, changeDi
           </TableSortLabel>
         </TableCell>
       ))}
-      <TableCell>
+      <TableCell align="right">
         Действия
       </TableCell>
     </TableRow>
