@@ -1,11 +1,9 @@
 import { TUser } from './user'
 
-interface ITask {
+interface ICity {
   id: number,
-  date: Date,
-  title: string,
-  user: TUser,
-  isCompleted: boolean,
+  region: string,
+  city: string
 }
 
 interface IFilter {
@@ -14,5 +12,5 @@ interface IFilter {
   isAsc: boolean
 }
 
-export type TTask = ITask
+export type TCity = ICity
 export type TFilter = IFilter

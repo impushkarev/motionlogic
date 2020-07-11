@@ -1,4 +1,4 @@
-import { TFilter } from 'types/task'
+import { TFilter } from 'types/city'
 
 type action = {
   type: string,
