@@ -16,7 +16,7 @@ const TableToolbar:React.FC<Props> = ({ changeSearch }) => {
   return (
     <Toolbar>
       <Typography style={{flexGrow: 1}} variant="h6" id="tableTitle" component="div">
-        Список задач
+        Список городов
       </Typography>
       <Input defaultValue="" onChange={(e) => changeHandler(e.target.value)} placeholder="Найти" />
     </Toolbar>

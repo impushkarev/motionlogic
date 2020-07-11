@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
+import { saveCities } from 'state/actions/city'
 import rootReducer from 'state'
 import './index.scss';
 
@@ -15,6 +16,10 @@ import ANY from 'pages/ANY'
 
 
 const store = createStore(rootReducer)
+
+store.subscribe(() => {
+  saveCities(store.getState().city)
+})
 
 ReactDOM.render(
   <React.StrictMode>

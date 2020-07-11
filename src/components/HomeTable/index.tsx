@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { TTask, TFilter } from 'types/task'
+import { TCity, TFilter } from 'types/city'
 import { Table, TableBody, TableHead, Paper, TableContainer } from '@material-ui/core'
 
 import TableToolbar from './tableToolbar'
@@ -8,11 +8,11 @@ import TableHeader from './tableHeader'
 import TableItem from './tableItem'
 
 interface Props {
-  tasks: TTask[],
+  cities: TCity[],
   filter: TFilter
 }
 
-const HomeTable:React.FC<Props> = ({ tasks, filter }) => {
+const HomeTable:React.FC<Props> = ({ cities, filter }) => {
   const sortItems = (a: any, b: any):number => {
     let res: number = 0
     if (a > b) res = -1
@@ -21,24 +21,20 @@ const HomeTable:React.FC<Props> = ({ tasks, filter }) => {
     return filter.isAsc ? res : (res * -1)
   }
 
-  const filteredTasks = tasks.filter((task) => filter.search !== '' ? task.title.toLowerCase().indexOf(filter.search.toLowerCase()) > -1 : task)
-  const sortedTasks = filteredTasks.sort((a: TTask, b: TTask) => {
+  const filteredTasks = cities.filter((city) => filter.search !== '' ? city.city.toLowerCase().indexOf(filter.search.toLowerCase()) > -1 : city)
+  const sortedTasks = filteredTasks.sort((a: TCity, b: TCity) => {
     switch (filter.field) {
-      case 'checkbox':
-        return sortItems(a.isCompleted, b.isCompleted)
-      case 'date':
-        return sortItems(a.date, b.date)
-      case 'author':
-        return sortItems((a.user === null) ? '' : a.user.name, (b.user === null) ? '' : b.user.name)
-      case 'task':
-        return sortItems(a.title, b.title)
+      case 'city':
+        return sortItems(a.city, b.city)
+      case 'region':
+        return sortItems(a.region, b.region)
       default:
         return 0
     }
   })
 
   useEffect(() => {
-    document.title = `IDECO | Найдено ${filteredTasks.length} задач(и)`
+    document.title = `MOTIONLOGIC | Найдено ${filteredTasks.length} города(ов)`
   }, [filteredTasks.length])
 
   return (
@@ -51,29 +47,19 @@ const HomeTable:React.FC<Props> = ({ tasks, filter }) => {
             <TableHeader headCells={[
               {
                 id: 0,
-                name: 'checkbox',
-                title: ''
+                name: 'city',
+                title: 'Города'
               },
               {
                 id: 1,
-                name: 'date',
-                title: 'Дата'
+                name: 'region',
+                title: 'Регион'
               },
-              {
-                id: 2,
-                name: 'author',
-                title: 'Исполнитель'
-              },
-              {
-                id: 3,
-                name: 'task',
-                title: 'Задача',
-              }
             ]} />
           </TableHead>
           <TableBody>
-            {sortedTasks.map((task:TTask, index) => (
-              <TableItem key={index} task={task} />
+            {sortedTasks.map((city:TCity, index) => (
+              <TableItem key={index} city={city} />
             ))}
           </TableBody>
         </Table>
@@ -83,7 +69,7 @@ const HomeTable:React.FC<Props> = ({ tasks, filter }) => {
 }
 
 const mapStateToProps = (state: any) => ({
-  tasks: state.task,
+  cities: state.city,
   filter: state.filter
 })
 

@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import task from 'state/reducers/task'
+import city from 'state/reducers/city'
 import filter from 'state/reducers/filter'
 
 export default combineReducers({
-  task,
+  city,
   filter
 })

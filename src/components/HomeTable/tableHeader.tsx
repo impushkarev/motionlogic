@@ -1,5 +1,5 @@
 import React from 'react'
-import { TFilter } from 'types/task'
+import { TFilter } from 'types/city'
 import { connect } from 'react-redux'
 import { changeFilter, changeDirection } from 'state/actions/filter'
 import { TableCell, TableRow, TableSortLabel } from '@material-ui/core'
@@ -28,7 +28,7 @@ const TableHeader:React.FC<Props> = ({ headCells, filter, changeFilter, changeDi
           </TableSortLabel>
         </TableCell>
       ))}
-      <TableCell>
+      <TableCell align="right">
         Действия
       </TableCell>
     </TableRow>

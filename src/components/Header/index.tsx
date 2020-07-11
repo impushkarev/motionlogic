@@ -8,7 +8,7 @@ const Header:React.FC = () => {
       <Container>
         <Toolbar>
           <Typography variant="h6" className="logo">
-            Ideco
+            Motion Logic
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>

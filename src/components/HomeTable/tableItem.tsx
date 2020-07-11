@@ -1,87 +1,32 @@
-import React, { useState, useRef } from 'react'
-import { TTask } from 'types/task'
+import React from 'react'
+import { TCity } from 'types/city'
 import { connect } from 'react-redux'
-import { updateTask, deleteTask } from 'state/actions/task'
-import { TableCell, TableRow, Checkbox, IconButton, Input } from '@material-ui/core'
+import { deleteCity } from 'state/actions/city'
+import { TableCell, TableRow, IconButton } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
-import EditIcon from '@material-ui/icons/Edit'
-import CheckIcon from '@material-ui/icons/Check'
-import CloseIcon from '@material-ui/icons/Close'
 
 
 
 interface Props {
-  task: TTask,
-  updateTask(task: TTask): void,
-  deleteTask(id: number): void
+  city: TCity,
+  deleteCity(id: number): void
 } 
 
-const TableItem:React.FC<Props> = ({ task, updateTask, deleteTask }) => {
-  const input = useRef<HTMLInputElement>(null)
-  const [isEdit, setEdit] = useState(false)
+const TableItem:React.FC<Props> = ({ city, deleteCity }) => {
 
-  const changeCheckbox = () => {
-    updateTask({ ...task, isCompleted: !task.isCompleted })
-  }
-
-  const startEdit = () => {
-    setEdit(true)
-  }
-  const saveEdit = () => {
-    if (input && input.current) {
-      const val = input.current.value
-      updateTask({ ...task, title: val })
-    }
-    closeEdit()
-  }
-  const closeEdit = () => {
-    setEdit(false)
-  }
-
-  const actionsIcon = (
-    <>
-      <IconButton aria-label="delete" onClick={startEdit}>
-        <EditIcon />
-      </IconButton>
-      <IconButton aria-label="delete" onClick={() => deleteTask(task.id)} >
-        <DeleteIcon/>
-      </IconButton>
-    </>
-  )
-  const editIcon = (
-    <>
-      <IconButton aria-label="delete" onClick={saveEdit}>
-        <CheckIcon />
-      </IconButton>
-      <IconButton aria-label="delete" onClick={closeEdit}>
-        <CloseIcon />
-      </IconButton>
-    </>
-  )
-  const actionIcons = () => {
-    return !isEdit ? actionsIcon : editIcon
-  }
-
+  console.log(city)
   return (
     <TableRow>
-      <TableCell padding="checkbox">
-        <Checkbox checked={task.isCompleted} onClick={changeCheckbox} />
-      </TableCell>
-      <TableCell padding="none">
-        {task.date.toDateString()}
+      <TableCell>
+        {city.city}
       </TableCell>
       <TableCell>
-        {task.user !== null ? task.user.name : ''}
+        {city.region}
       </TableCell>
-      <TableCell>
-        {!isEdit ? (
-          task.title
-        ) : (
-          <Input defaultValue={task.title} fullWidth inputRef={input} />
-        )}
-      </TableCell>
-      <TableCell>
-        {actionIcons()}
+      <TableCell align="right">
+        <IconButton aria-label="delete" onClick={() => deleteCity(city.id)} >
+          <DeleteIcon/>
+        </IconButton>
       </TableCell>
     </TableRow>
   )
@@ -91,8 +36,7 @@ const mapStateToProps = (state: any) => ({
   
 })
 const mapDispatchToProps = (dispatch: any) => ({
-  updateTask: (task: TTask) => dispatch(updateTask(task)),
-  deleteTask: (id: number) => dispatch(deleteTask(id))
+  deleteCity: (id: number) => dispatch(deleteCity(id))
 })
 
 export default connect(
